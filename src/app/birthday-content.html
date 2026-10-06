@@ -7,6 +7,41 @@
       <p class="eyebrow">Welcome, Tomlu</p>
       <h2>Hey<br><em>Tomlu...</em> ❤️</h2>
       <p class="lead">I made this little world<br>especially for you.</p>
+
+      <!-- Birthday timer -->
+       <!-- Start -->
+          <div class="birthday-timer">
+            <p class="timer-caption">❤️ Every second since your birthday</p>
+
+            <div class="timer-value">
+              <div class="timer-unit">
+                <strong>{{ timerDays() }}</strong>
+                <span>Days</span>
+              </div>
+
+              <div class="timer-unit">
+                 <strong>{{ timerHours() }}</strong>
+                   <span>Hours</span>
+              </div>
+
+              <div class="timer-unit">
+                <strong>{{ timerMinutes() }}</strong>
+                <span>Minutes</span>
+              </div>
+
+              <div class="timer-unit seconds">
+               <strong>{{ timerSeconds() }}</strong>
+                <span>Seconds</span>
+              </div>
+            </div>
+
+            <p class="timer-message">
+              Every second is another moment I'm lucky to have you in my life. 💗
+            </p>
+          </div>
+       <!-- END -->
+
+
       <button class="round-btn" (click)="start()" aria-label="Start birthday story">↓</button>
       <p class="scroll-label">Scroll down</p>
     </section>
@@ -364,3 +399,20 @@ So, for me, this isn’t just about a link or a gift. It’s about celebrating y
       <p class="made">I know you’re really busy today because of the Dasara festival. Whenever you get some time, please revisit these memories again and just flow back into our bond for a little while. Lot More in this ❤️ </p>
     </section>
   </main>
+<!-- Compact timer: visible only while scrolling -->
+@if (isScrolled()) {
+  <div class="floating-timer">
+    <span class="floating-timer-heart">♥</span>
+
+    <div class="floating-timer-content">
+      <span class="floating-timer-label">EVERY TICK, A LITTLE MORE LOVE</span>
+
+      <div class="floating-timer-value">
+        {{ timerDays() }}d
+        {{ timerHours() }}h
+        {{ timerMinutes() }}m
+        {{ timerSeconds() }}s
+      </div>
+    </div>
+  </div>
+}
