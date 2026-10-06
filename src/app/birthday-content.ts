@@ -9,11 +9,11 @@ import { Component, computed, HostListener, signal, ViewEncapsulation } from '@a
 })
 export class BirthdayContent {
    elapsedSeconds = signal(0);
-  isScrolled = signal(false);
-  @HostListener('window:scroll')
-onWindowScroll(): void {
-  this.isScrolled.set(window.scrollY > 120);
-}
+  // isScrolled = signal(false);
+//   @HostListener('window:scroll')
+// onWindowScroll(): void {
+//   this.isScrolled.set(window.scrollY > 120);
+// }
   private timerId?: ReturnType<typeof setInterval>;
 
   private readonly birthdayDate =
