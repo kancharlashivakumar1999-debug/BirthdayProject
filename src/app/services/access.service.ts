@@ -1,22 +1,22 @@
 import { Injectable, signal } from '@angular/core';
+import { environment } from '../../environments/environment';
 
 @Injectable({ providedIn: 'root' })
 export class AccessService {
-  // Change this before sharing the link.
-  private readonly password = 'Reddy@849';
-  readonly unlocked = signal(sessionStorage.getItem('baggie-unlocked') === 'yes');
+  readonly unlocked = signal(false);
 
-  check(value: string): boolean {
-    const ok = value.trim() === this.password;
+  async check(value: string): Promise<boolean> {
+    const bytes = new TextEncoder().encode(value.trim());
+    const digest = await crypto.subtle.digest('SHA-256', bytes);
+    const hash = Array.from(new Uint8Array(digest), byte => byte.toString(16).padStart(2, '0')).join('');
+    const ok = hash === environment.appPasswordSha256;
     if (ok) {
-      sessionStorage.setItem('baggie-unlocked', 'yes');
       this.unlocked.set(true);
     }
     return ok;
   }
 
   lock(): void {
-    sessionStorage.removeItem('baggie-unlocked');
     this.unlocked.set(false);
   }
 }
