@@ -1,5 +1,6 @@
 import { Component, inject, signal, Type } from '@angular/core';
 import { NgComponentOutlet } from '@angular/common';
+import { inject as injectAnalytics } from '@vercel/analytics';
 import { AccessService } from './services/access.service';
 
 @Component({
@@ -7,7 +8,7 @@ import { AccessService } from './services/access.service';
   standalone: true,
   imports: [NgComponentOutlet],
   templateUrl: './app.html',
-  styleUrl: './app.scss'
+  styleUrl: './app.scss',
 })
 export class App {
   readonly password = signal('');
@@ -16,7 +17,11 @@ export class App {
   readonly contentComponent = signal<Type<unknown> | null>(null);
   private readonly accessService = inject(AccessService);
 
-  constructor() {}
+  constructor() {
+    if (typeof window !== 'undefined') {
+      injectAnalytics();
+    }
+  }
 
   async unlock(): Promise<void> {
     try {
@@ -25,7 +30,10 @@ export class App {
       if (ok) {
         const { BirthdayContent } = await import('./birthday-content');
         this.contentComponent.set(BirthdayContent);
-        setTimeout(() => document.getElementById('intro')?.scrollIntoView({ behavior: 'smooth' }), 250);
+        setTimeout(
+          () => document.getElementById('intro')?.scrollIntoView({ behavior: 'smooth' }),
+          250,
+        );
       }
     } catch {
       this.wrongPassword.set(true);
@@ -38,7 +46,7 @@ export class App {
   }
 
   togglePassword(): void {
-    this.showPassword.update(v => !v);
+    this.showPassword.update((v) => !v);
   }
 
   start(): void {
