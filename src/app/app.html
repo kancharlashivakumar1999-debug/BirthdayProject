@@ -1,4 +1,4 @@
-@if (!contentComponent()) {
+@if (!accessService.unlocked()) {
   <main class="gate" aria-label="Birthday surprise password gate">
     <div class="ambient ambient-a"></div>
     <div class="ambient ambient-b"></div>
@@ -6,7 +6,7 @@
       <div class="bunny" aria-hidden="true">🐰</div>
       <p class="eyebrow">A tiny private world</p>
       <h1>Oiii <span>Tommie...</span></h1>
-      <p class="gate-copy">This little place is only for you. ❤️<br>You know the password, right? 😌</p>
+      <p class="gate-copy" (click)="unlockSurprise()">This little place is only for you. ❤️<br>You know the password, right? 😌</p>
 
       <div class="password-wrap">
         <input
@@ -34,6 +34,5 @@
     </div>
   </main>
 } @else {
-  <ng-container *ngComponentOutlet="contentComponent()" />
+  <router-outlet />
 }
-

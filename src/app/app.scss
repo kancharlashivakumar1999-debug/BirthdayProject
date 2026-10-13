@@ -569,3 +569,94 @@
     font-size: 8px;
   }
 }
+
+.secret-hunt-clue {
+  margin-top: 18px;
+  color: #ffd4e7;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.photo-placeholder { position: relative; }
+
+.hidden-surprise-envelope {
+  position: absolute;
+  right: 8px;
+  bottom: 8px;
+  display: grid;
+  width: 34px;
+  height: 34px;
+  place-items: center;
+  padding: 0;
+  border: 1px solid rgba(255, 255, 255, .35);
+  border-radius: 50%;
+  background: rgba(36, 20, 42, .55);
+  font-size: 17px;
+  opacity: .48;
+  cursor: pointer;
+  transition: opacity .2s ease, transform .2s ease, background .2s ease;
+}
+
+.hidden-surprise-envelope:hover,
+.hidden-surprise-envelope:focus-visible {
+  opacity: 1;
+  transform: scale(1.12);
+  background: rgba(36, 20, 42, .9);
+}
+
+.hidden-surprise-envelope:focus-visible {
+  outline: 2px solid #fff;
+  outline-offset: 3px;
+}
+
+.surprise-section {
+  width: min(100%, 780px);
+  margin: 32px auto 0;
+  padding: 8px 0 24px;
+  color: #33252e;
+  scroll-margin-top: 24px;
+  animation: rise .7s ease both;
+}
+
+.surprise-card {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+  padding: clamp(28px, 6vw, 58px);
+  border: 1px solid rgba(255, 255, 255, .65);
+  border-radius: 28px;
+  background: linear-gradient(145deg, #fff9f4, #ffe5ef 58%, #f2e6ff);
+  box-shadow: 0 28px 90px rgba(5, 2, 12, .42);
+  text-align: left;
+}
+
+.surprise-card::before,
+.surprise-card::after {
+  position: absolute;
+  z-index: 0;
+  color: rgba(221, 112, 160, .12);
+  font-size: clamp(90px, 20vw, 180px);
+  line-height: 1;
+  pointer-events: none;
+}
+
+.surprise-card::before { content: '♡'; top: -28px; right: -10px; }
+.surprise-card::after { content: '✦'; right: 12%; bottom: -72px; font-size: 110px; }
+
+.surprise-card > * { position: relative; z-index: 1; }
+.surprise-icon { display: block; margin-bottom: 16px; font-size: 38px; }
+.surprise-eyebrow { margin: 0 0 12px; color: #a74d78; font-size: 11px; font-weight: 800; letter-spacing: .16em; text-transform: uppercase; }
+.surprise-card h2 { margin: 0 0 24px; color: #582c49; font-size: clamp(30px, 6vw, 48px); line-height: 1.12; letter-spacing: -.04em; }
+.surprise-card h2 span { color: #d34e8a; }
+.surprise-card p { margin: 0 0 17px; font-family: Georgia, 'Times New Roman', serif; font-size: clamp(16px, 2.2vw, 18px); line-height: 1.85; }
+.surprise-card .surprise-tease { color: #7a3156; font-size: clamp(20px, 4vw, 28px); font-weight: 700; line-height: 1.55; }
+.surprise-card .surprise-note { margin-top: 24px; color: #8b5972; font-family: inherit; font-size: 14px; }
+.surprise-card .surprise-signoff { margin-top: 28px; color: #8c4265; font-family: 'Pacifico', cursive; font-size: clamp(18px, 3vw, 23px); line-height: 1.8; }
+.surprise-card .surprise-back { margin-top: 28px; font-family: inherit; font-size: 14px; }
+.surprise-back a { color: #a74d78; text-underline-offset: 4px; }
+
+@media (max-width: 600px) {
+  .surprise-section { margin-top: 24px; }
+  .surprise-card { border-radius: 22px; }
+  .surprise-card p { line-height: 1.72; }
+}

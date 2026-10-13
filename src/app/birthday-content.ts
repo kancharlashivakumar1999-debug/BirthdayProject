@@ -1,13 +1,16 @@
-import { Component, computed, HostListener, signal, ViewEncapsulation } from '@angular/core';
+import { Component, computed, inject, signal, ViewEncapsulation } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-birthday-content',
   standalone: true,
+  imports: [],
   templateUrl: './birthday-content.html',
   styleUrl: './app.scss',
   encapsulation: ViewEncapsulation.None
 })
 export class BirthdayContent {
+  private readonly router = inject(Router);
    elapsedSeconds = signal(0);
   // isScrolled = signal(false);
 //   @HostListener('window:scroll')
@@ -15,7 +18,6 @@ export class BirthdayContent {
 //   this.isScrolled.set(window.scrollY > 120);
 // }
   private timerId?: ReturnType<typeof setInterval>;
-
   private readonly birthdayDate =
     new Date(2000, 9, 20, 0, 0, 0).getTime();
 
@@ -66,7 +68,9 @@ export class BirthdayContent {
     document.getElementById('intro')
       ?.scrollIntoView({ behavior: 'smooth' });
   }
-
+  onHeartClick(): void {
+    void this.router.navigate(['/surprise']);
+  }
   ngOnDestroy(): void {
     if (this.timerId) {
       clearInterval(this.timerId);

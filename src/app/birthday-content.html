@@ -98,6 +98,7 @@
        <div class="photo-frame">
         <div class="photo-placeholder">
           <img [src]="'memories/First_gift.png'" alt="mines first gift">
+          <button class="hidden-surprise-envelope" type="button" aria-label="Open the hidden birthday message" (click)="onHeartClick()">💌</button>
         </div>
         <p> 19 October 2023 : The first gift I gave to you. Before buying it, I didn’t know how to convince you to accept it, but I really wanted you to have it Each and EveryDay with you. ❤️ </p>
       </div>
@@ -319,6 +320,9 @@ That’s all I wish for. ❤️</p>
           Happy Birthday, Tomlu! 🥹 No matter how much life changes,
           I hope we always have reasons to smile, laugh, and make new
           memories together. You deserve all the happiness in the world.
+        </p>
+        <p class="secret-hunt-clue">
+          Psst… one little surprise is hiding beside the very first gift I wanted you to keep close every day. Can you find it? 🔎
         </p>
       </div>
     </article>

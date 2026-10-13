@@ -1,12 +1,12 @@
-import { Component, inject, signal, Type } from '@angular/core';
-import { NgComponentOutlet } from '@angular/common';
+import { Component, inject, signal } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 import { inject as injectAnalytics } from '@vercel/analytics';
 import { AccessService } from './services/access.service';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [NgComponentOutlet],
+  imports: [RouterOutlet],
   templateUrl: './app.html',
   styleUrl: './app.scss',
 })
@@ -14,22 +14,21 @@ export class App {
   readonly password = signal('');
   readonly wrongPassword = signal(false);
   readonly showPassword = signal(false);
-  readonly contentComponent = signal<Type<unknown> | null>(null);
-  private readonly accessService = inject(AccessService);
+  readonly accessService = inject(AccessService);
 
   constructor() {
     if (typeof window !== 'undefined') {
       injectAnalytics();
     }
   }
-
+unlockSurprise(){
+    this.accessService.unlockSurprise();
+}
   async unlock(): Promise<void> {
     try {
       const ok = await this.accessService.check(this.password());
       this.wrongPassword.set(!ok);
       if (ok) {
-        const { BirthdayContent } = await import('./birthday-content');
-        this.contentComponent.set(BirthdayContent);
         setTimeout(
           () => document.getElementById('intro')?.scrollIntoView({ behavior: 'smooth' }),
           250,
@@ -49,11 +48,4 @@ export class App {
     this.showPassword.update((v) => !v);
   }
 
-  start(): void {
-    document.getElementById('birthday')?.scrollIntoView({ behavior: 'smooth' });
-  }
-
-  replay(): void {
-    document.getElementById('intro')?.scrollIntoView({ behavior: 'smooth' });
-  }
 }

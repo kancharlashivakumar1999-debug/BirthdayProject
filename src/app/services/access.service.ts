@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment';
 @Injectable({ providedIn: 'root' })
 export class AccessService {
   readonly unlocked = signal(false);
+  surpriseUnlockBeforeDate = signal(false);
 
   async check(value: string): Promise<boolean> {
     const bytes = new TextEncoder().encode(value.trim());
@@ -14,6 +15,10 @@ export class AccessService {
       this.unlocked.set(true);
     }
     return ok;
+  }
+
+  unlockSurprise(): void {
+    this.surpriseUnlockBeforeDate.set(true);
   }
 
   lock(): void {
