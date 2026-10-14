@@ -321,9 +321,14 @@ That’s all I wish for. ❤️</p>
           I hope we always have reasons to smile, laugh, and make new
           memories together. You deserve all the happiness in the world.
         </p>
-        <p class="secret-hunt-clue">
+        <p class="secret-hunt-clue" (click)="clueEnable()">
+          Clue Kaavlentraa
+        </p>
+        @if(hiddenSurpriseFound) {        
+        <p class="secret-hunt-clue" >
           Psst… one little surprise is hiding beside the very first gift I wanted you to keep close every day. Can you find it? 🔎
         </p>
+      }
       </div>
     </article>
 

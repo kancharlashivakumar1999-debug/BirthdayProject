@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 export class BirthdayContent {
   private readonly router = inject(Router);
    elapsedSeconds = signal(0);
+   hiddenSurpriseFound :boolean = false;
   // isScrolled = signal(false);
 //   @HostListener('window:scroll')
 // onWindowScroll(): void {
@@ -20,7 +21,9 @@ export class BirthdayContent {
   private timerId?: ReturnType<typeof setInterval>;
   private readonly birthdayDate =
     new Date(2000, 9, 20, 0, 0, 0).getTime();
-
+clueEnable(): void {
+  this.hiddenSurpriseFound = true;
+}
   // Derived values automatically update when elapsedSeconds changes.
   timerDays = computed(() =>
     Math.floor(this.elapsedSeconds() / 86400)
